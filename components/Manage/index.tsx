@@ -428,6 +428,7 @@ const SDKDemo = () => {
                 <thead>
                   <tr>
                     <th>Txn No.</th>
+                    <th>Client ID</th>
                     <th>Wallet Address</th>
                     <th>User ID</th>
                     <th>Transaction ID</th>
@@ -444,12 +445,13 @@ const SDKDemo = () => {
                     return (
                       <tr key={reversedIndex} className="entry">
                         <td>{reversedIndex}</td>
+                        <td>{reversedTransaction.clientID}</td>
                         <td>
                           <a className="blue-link" href={'https://sonar.warp.cc/#/app/contract/' + reversedTransaction.walletAddress} target="_blank" rel="noopener noreferrer">
                             {shortenString(reversedTransaction.walletAddress)}
                           </a>
                         </td>
-                        <td>{reversedTransaction.userID}</td>
+                        <td>shortenString({reversedTransaction.userID})</td>
                         <td>
                           <a className="blue-link" href={(() => {
                             switch (reversedTransaction.type) {
