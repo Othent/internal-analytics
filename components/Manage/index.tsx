@@ -9,17 +9,7 @@ Chart.register(CategoryScale, LinearScale, LineElement, PointElement, ArcElement
 import { DMSans400 } from '../../utils/fonts';
 
 const SDKDemo = () => {
-  const [othent, setOthent] = useState(null);
-  useEffect(() => {
-    const initializeOthent = async () => {
-      const othentInstance = await Othent({ API_ID: 'd7a29242f7fdede654171a0d3fd25163' });
-      setOthent(othentInstance);
-    };
-    initializeOthent();
-  }, []);
 
-
-  
   
   const calculateData = (transactions) => {
 
@@ -114,9 +104,7 @@ const SDKDemo = () => {
 
 
   // universal
-  const [API_ID, setAPI_ID] = useState(null);
   const [transactions, setTransactions] = useState(null);
-  const [userDetails, setUserDetails] = useState(null);
   
   // pie chart data
   const [pieChartDataWallets, setPieChartDataWallets] = useState(null);
@@ -148,10 +136,6 @@ const SDKDemo = () => {
       window.location.reload()
     }
     setTransactions(null); 
-    const details = await othent.logIn();
-    setUserDetails(details);
-    const { API_ID } = await othent.getAPIID();
-    setAPI_ID(API_ID);
     axios.post('https://server.othent.io/query-internal-analytics', { password })
       .then((response) => {
         if (response.data.success === false) {
@@ -181,7 +165,7 @@ const SDKDemo = () => {
 
         
         const pieChartDataWallets = {
-          labels: Object.values(walletCounts).map(item => item.walletAddress),
+          labels: Object.values(walletCounts).map(item => shortenString(item.walletAddress)),
           datasets: [{
             data: Object.values(walletCounts).map(item => item.count),
             backgroundColor: Object.keys(walletCounts).map((item, index) => colors[index % colors.length]),
@@ -322,7 +306,7 @@ const SDKDemo = () => {
           </Styled.IntroSection>
         )}
 
-        {transactions && userDetails && pieChartDataWallets && pieChartDataFunctions && pieChartDataTypes && pieChartDataSuccess && lineChartDataTotal && lineChartDataToday && (
+        {transactions && pieChartDataWallets && pieChartDataFunctions && pieChartDataTypes && pieChartDataSuccess && lineChartDataTotal && lineChartDataToday && (
           <>
             <Styled.DataContainer>
               <Styled.BigDataContainer1>
@@ -445,13 +429,13 @@ const SDKDemo = () => {
                     return (
                       <tr key={reversedIndex} className="entry">
                         <td>{reversedIndex}</td>
-                        <td>{reversedTransaction.clientID}</td>
+                        <td>{shortenString(reversedTransaction.ClientID)}</td>
                         <td>
                           <a className="blue-link" href={'https://sonar.warp.cc/#/app/contract/' + reversedTransaction.walletAddress} target="_blank" rel="noopener noreferrer">
                             {shortenString(reversedTransaction.walletAddress)}
                           </a>
                         </td>
-                        <td>shortenString({reversedTransaction.userID})</td>
+                        <td>{shortenString(reversedTransaction.userID)}</td>
                         <td>
                           <a className="blue-link" href={(() => {
                             switch (reversedTransaction.type) {
