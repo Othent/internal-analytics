@@ -296,7 +296,7 @@ const SDKDemo = () => {
         {!transactions && (
           <Styled.IntroSection>
             <input
-              type='text'
+              type='password'
               placeholder='Password'
               className={DMSans400.className}
               value={password}
