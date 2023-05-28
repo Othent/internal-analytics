@@ -58,27 +58,6 @@ export const SubmitButton = styled(Button)`
   width: 8rem;
 `;
 
-export const UserHeader = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  background: rgb(242, 242, 242);
-  border: 1px solid rgb(211, 227, 252);
-  margin-top: 20px;
-
-  h1 {
-    font-size: 1rem;
-  }
-
-  @media (max-width: 768px) {
-    margin-top: 4rem;
-  }
-`;
-
 
 export const DataContainer = styled.div`
   display: grid;
@@ -86,9 +65,11 @@ export const DataContainer = styled.div`
   gap: 1rem;
   width: 90vw;
   max-width: 1200px;
+  margin-top: 20px;
   margin-bottom: 20px;
 
   @media (max-width: 768px) {
+    margin-top: 4rem;
     grid-template-columns: 1fr;
   }
 `;

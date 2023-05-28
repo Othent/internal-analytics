@@ -154,7 +154,12 @@ const SDKDemo = () => {
     setAPI_ID(API_ID);
     axios.post('https://server.othent.io/query-internal-analytics', { password })
       .then((response) => {
-        const transactions = response.data.document.transactions;
+        if (response.data.success === false) {
+          alert('Incorrect password')
+          window.location.reload()
+        }
+
+        const transactions = response.data.transactions;
         setTransactions(transactions);
 
 
@@ -253,15 +258,7 @@ const SDKDemo = () => {
           }
         };
         setLineChartDataToday(lineChartDataToday);
-  
-
-        console.log(lineChartDataToday.datasets[0].data)
-
-
-
-
-  
-      
+    
 
 
       })
@@ -327,10 +324,6 @@ const SDKDemo = () => {
 
         {transactions && userDetails && pieChartDataWallets && pieChartDataFunctions && pieChartDataTypes && pieChartDataSuccess && lineChartDataTotal && lineChartDataToday && (
           <>
-            <Styled.UserHeader>
-              <h1>Othent internal analytics</h1>
-            </Styled.UserHeader>
-
             <Styled.DataContainer>
               <Styled.BigDataContainer1>
                 <b>{totalUsers}</b>
